@@ -1,3 +1,9 @@
+from flask import Flask,render_template
+app=Flask(__name__)
+
+posts=[['nirjal','bikram','jell']]
+
+
 from tkinter import *
 import pyttsx3
 import wikipedia
@@ -136,3 +142,19 @@ print("PLACES===============================")
 for plac in places:
     print(plac)
     print("\n \n")
+
+
+
+
+@app.route("/")
+@app.route("/home")
+
+def home():
+    return render_template('home.html',users=users)
+
+@app.route("/about")
+def abt():
+    return render_template('about.html',title="HELL YEAH")
+
+if __name__=="__main__":
+    app.run(debug=True)
