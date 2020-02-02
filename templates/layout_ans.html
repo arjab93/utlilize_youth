@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <style>
+        style{margin-left: 80px;margin-top:50px;color:white;border:2px inset black;padding:10px 20px; margin-right:400px ;background-color: rgb(88, 110, 131)}
+    </style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else%}
+        <title>PACK</title>
+    {% endif %}
+  </head>
+  <body>
+
+      <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        {%block content%}{%endblock%}
+        <script src="" async defer></script>
+    </body>
+</html>

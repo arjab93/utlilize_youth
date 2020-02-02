@@ -1,13 +1,12 @@
-from flask import Flask,render_template
+from flask import Flask,render_template,request
 app=Flask(__name__)
 
-posts=[['nirjal','bikram','jell']]
-
+#posts=['nirjal','bikram','jell']
 
 from tkinter import *
 import pyttsx3
 import wikipedia
-
+import threading
 
 s=pyttsx3.init()
 
@@ -67,6 +66,9 @@ class user:
             return ("A with "+str(name)+" was added")
 
 
+
+    
+
 class place:
     def __init__(self,name,district,latitude,longitude,rate,tag):
         self.name=name
@@ -74,7 +76,7 @@ class place:
         self.longitude=longitude
         self.latitude=latitude
         self.history=rate
-        self.rate=sum(rate)/len(rate)
+        self.rate=round(sum(rate)/len(rate),2)
         self.tag=tag
         place.add(self.name,self.district,self.longitude,self.longitude,self.history,self.rate,self.tag)
 
@@ -85,9 +87,10 @@ class place:
     def getwikipediainfo(query):
         sum1=wikipedia.summary(query,sentences=1)
         sum2=wikipedia.summary(query)
-        print(sum2)
-        speak(sum1)
-
+        #tospeak is sum1,to print is sum 2
+        query=wikipedia.page(query).title
+        return([sum1,sum2,query])
+    
     def getdistance(platlong,ulatlong):
         ux=float(ulatlong[0])
         uy=float(ulatlong[1])
@@ -96,10 +99,12 @@ class place:
         distance=((ux-px)^2+(uy-py)^2)^(1/2)
         return distance
 
-
 def speak(x):
+    print(x)
     s.say(x)
     s.runAndWait()
+
+
 
 #place.getwikipediainfo("Lumbini")
 
@@ -125,32 +130,75 @@ place("Butwal","Rupandehi",27.6866, 83.4323,[3,4,3,2,1],['park','lumbini'])
 place("Nagarkot","Kathamndu",27.7174, 85.5046,[3,4,5,1],['cycling','photography','adventure','sight seeing'])
 place("Lumbini","Rupandehi",27.6792, 83.5070,[5,4,5,4,5,5],['cycling','photography','buddhism','sight seeing'])
 place("Boudhanath","Kathmandu",27.7214, 85.3620,[5,4,2,1],['religious','spirituality','photography'])
+links=['butwal','nagarkot','lumbini','boudhanath']
 
-print("USER===============================")
-for us in users:
-    print (us)
-    print ("\n \n")
+
+@app.route('/signup/', methods=['post', 'get'])
+def login():
+    message = 'PLEASE ENTER VALID INFORMATION'
+    if request.method == 'POST':
+        name = request.form.get('name')
+        address = request.form.get('address')
+        age = request.form.get('age')  
+        email_address = request.form.get('email_address')
+        passkey=request.form.get('passkey')  
+        desp_ur=request.form.get('desp_ur')
+        license_no=request.form.get('liscense_no')
+        contact=request.form.get('contact')
+        sex=request.form.get('sex')
+        lang=request.form.get('lang')
+        lang=str(lang).split(",")
+
+    return render_template('layout_user_signup.html', message=message)
+
+
+@app.route("/butwal")
+def butwal():
+    wiki=place.getwikipediainfo("butwal")
+    x=wiki[0]
+    sum_2_print=wiki[1]
+    body=sum_2_print
+    head=wiki[2]
+    threading.Thread(name="get",target=speak,args=(x,)).start()
+    return render_template("desp.html",body=body,head=head)
+
+
+
+@app.route("/nagarkot")
+def nagarkot():
+    wiki=place.getwikipediainfo("nagarkot")
+    x=wiki[0]
+    sum_2_print=wiki[1]
+    body=sum_2_print
+    head=wiki[2]
+    threading.Thread(name="get",target=speak,args=(x,)).start()
+    return render_template("desp.html",body=body,head=head)
     
-print("guides===============================")
 
-for guid in guides:
-    print (guid)
-    print ("\n \n")
+@app.route("/lumbini")
+def lumbini():
+    wiki=place.getwikipediainfo("lumbini")
+    x=wiki[1]
+    head=wiki[2]
+    sum_2_print=wiki[0]
+    threading.Thread(name="get",target=speak,args=(x,)).start()
+    body=sum_2_print
+    return render_template("desp.html",body=body,head=head) 
 
-print("PLACES===============================")
-
-for plac in places:
-    print(plac)
-    print("\n \n")
-
-
-
+@app.route("/boudhanath")
+def boudhanath():
+    wiki=place.getwikipediainfo("boudhanath")
+    x=wiki[1]
+    sum_2_print=wiki[0]
+    body=sum_2_print
+    head=wiki[2]
+    threading.Thread(name="get",target=speak,args=(x,)).start()
+    return render_template("desp.html",body=body,head=head)
 
 @app.route("/")
 @app.route("/home")
-
 def home():
-    return render_template('home.html',users=users)
+    return render_template('home.html',places=places,links=links)
 
 @app.route("/about")
 def abt():

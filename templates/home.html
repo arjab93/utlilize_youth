@@ -1,8 +1,35 @@
 {% extends "layout.html" %}
-{% write_here%}
-<div class="container">
-        {% for user in users %}
-            <p>{{user[0]}}</p>
-        {%endfor %}
-</div>
-{%endwrite_here%}
+{% block content %}
+
+{% set i=0 %}
+
+<div class=>
+    
+    {% for place in places %}
+        <p>
+        
+            <h1> {{place[0] }} </h1>
+            <h5>District : {{place[1] }} </h5>
+            <h5>Rating : {{ place [5]}}</h5>
+            <h5>Recent Ratings :
+            {% for rate in place[4] %}
+                {{ rate }},
+            {%endfor%}
+            </h5>
+
+
+        <h5>Tags :
+            {% for rate in place[6] %}
+                {{ rate }},
+            {% endfor %}
+            </h5>
+        </p>
+        
+        {%set i=loop.index-1 %}
+
+        <a href="{{ links[i] }}" ><input type="button" value="Load More"></a>
+        
+    {%endfor %}
+
+ </div>
+{% endblock %}
