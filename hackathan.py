@@ -112,6 +112,8 @@ guide("Pratap","patan",19,"pratappokheral@gmail.com",'pratap_rocks','driver','10
 
 guide("Hiptap","pokhara",19,"hittappokheral@gmail.com",'hittaprocks','retired officer','masters','mero desh mero nepal','123123123123','9841823456','m',['hindi','english','french'],False,'4.3')
 
+guide("hittap","pokhara",19,"hittappaudel@gmail.com",'hittaprockz','coffee maker','masters','mero desh mero country','123123123123','9848823456','m',['hindi','jeum','french'],False,'4.3')
+
 #self,name,district,latitude,longitude,rate,tag
 place("Butwal","Rupandehi",27.6866, 83.4323,[3,4,3,2,1],['park','lumbini'])
 place("Nagarkot","Kathamndu",27.7174, 85.5046,[3,4,5,1],['cycling','photography','adventure','sight seeing'])
