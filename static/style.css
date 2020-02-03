@@ -1,0 +1,56 @@
+
+body{
+    margin-top:60px;
+    background-image: url("{{ url_for('static', filename='bg.jpg') }}");
+    background-repeat:no-repeat;
+    background-size: 100%;
+    background-position: -20% 0%;
+    
+}
+
+.division{
+    border-left: 2px outset black;
+    border-right: 2px outset black;
+    border-bottom: 2px outset black;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    text-align: end;
+    padding-right: 100px;
+    padding-top: 40px;
+    color:white;
+    background-color: rgba(0,0,0,0.4);
+}
+
+form{
+    border-left: 2px outset black;
+    border-right: 2px outset black;
+    border-bottom: 2px outset black;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    text-align: end;
+    padding-right: 100px;
+    padding-top: 40px;
+    background-color: rgba(0,0,0,0.4);
+    color:white;
+}
+
+input{
+    background-color: rgba(0,0,0,0.4);
+    border:2px outset;
+    color:black;
+}
+
+h1{
+    border: 2px outset black;
+    font-size: 1.5rem;
+    max-width: 500px;
+    padding-top: 30px;
+    margin: auto;
+    text-decoration: bold;
+    padding-left: 40px;
+    padding:10px;
+    color:rgb(255, 255, 255);
+    background: rgba(36, 60, 240, 0.767);
+}

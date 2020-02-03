@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body{
+            margin-top:60px;
+            background-image: url("{{ url_for('static', filename='bg.jpg') }}");
+            background-repeat:no-repeat;
+            background-size: 100%;
+            background-position: -20% 0%;
+            
+        }
+        
+        .division{
+            border-left: 2px outset black;
+            border-right: 2px outset black;
+            border-bottom: 2px outset black;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            text-align: end;
+            padding-right: 100px;
+            padding-top: 40px;
+            color:white;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        form{
+            border-left: 2px outset black;
+            border-right: 2px outset black;
+            border-bottom: 2px outset black;
+            width: 100%;
+            max-width: 500px;
+            margin: auto;
+            text-align: end;
+            padding-right: 100px;
+            padding-top: 40px;
+            background-color: rgba(0,0,0,0.4);
+            color:white;
+        }
+        
+        input{
+            background-color: rgba(0,0,0,0.4);
+            border:1px inset;
+            height:35px;
+            padding-left:10px;
+            margin-left:10px;
+            color:white;
+        }
+
+
+        h1{
+            border: 2px outset black;
+            font-size: 1.5rem;
+            max-width: 500px;
+            padding-top: 30px;
+            margin: auto;
+            text-decoration: bold;
+            padding-left: 40px;
+            padding:10px;
+            color:rgb(255, 255, 255);
+            background: rgba(36, 60, 240, 0.767);
+        }
+        </style>   
+        
+</head>
+<body>
+    <div class="container"> 
+        {% if message %}
+            <h1>{{ message }}</h1>
+        {% endif %}
+        
+        <form class="form" action="" method="post">
+            <p>
+                <label for="username">Name</label>
+                <input type="text" name="username">
+            </p>
+            <p>
+
+                <label for="address">District</label>
+                <input type="text" name="address">
+            </p>
+            <p>
+                
+                <label for="latitude">latitude[ignore string]</label>
+                <input type="text" name="latitude">
+            </p>
+
+            <p>
+                <label for="longitude">longitude[ignore string]</label>
+                <input type="text" name="longitude">
+            </p>
+
+            <p>
+                <label for="tags">Why this place</label>
+                <input type="text" name="tags">
+            </p>
+
+            <p>
+                <input type="submit">
+            </p>
+        </div>
+    </form>
+ 
+</body>
+</html>

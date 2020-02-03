@@ -22,7 +22,6 @@ places=[]
 #name,district,latitude,longitude,rate_history
 
 class guide:
-
     def __init__(self,name,address,age,email,passkey,position,skill,desp_ur,liscence_no,contact,sex,lang,busy,rating):
         self.name=name
         self.address=address
@@ -38,12 +37,12 @@ class guide:
         self.lang=lang
         self.busy=busy
         self.rating=rating
-        guide.Add(self.name,self.address,self.email,self.position,self.skill,self.age,self.desp_ur,self.liscence,self.contact,self.sex,self.lang,self.busy,self.rating)        
+        guide.Add(self.name,self.address,self.email,self.position,self.skill,self.passkey,self.age,self.desp_ur,self.liscence,self.contact,self.sex,self.lang,self.busy,self.rating)
 
-    def Add(name,address,email,position,skill,age,desp_ur,liscence_no,contact,sex,lang,busy,rating):
-        if (len(name)!=0 and len(address)!=0 and int(age)>17 and len(liscence_no)>8 and len(position)!=0 and len(contact)!=0):
+    def Add(name,address,email,position,skill,passkey,age,desp_ur,liscence,contact,sex,lang,busy,rating):
+        if (len(name)!=0 and len(address)!=0 and int(age)>17 and len(liscence)>8 and len(position)!=0 and len(contact)!=0):
             print('true')
-            guides.append([name,address,email,position,skill,age,desp_ur,liscence_no,contact,sex,lang,busy,rating])
+            guides.append([name,address,email,position,skill,age,desp_ur,liscence,contact,sex,lang,busy,rating])
             return ("A with "+str(name)+" was added")
 
 class user:
@@ -63,11 +62,10 @@ class user:
         if (len(name)!=0 and len(address)!=0 and int(age)>17 and len(contact)!=0):
             #formally adding to the list
             users.append([name,address,email,passkey,age,desp_ur,contact,sex,lang])
-            return ("A with "+str(name)+" was added")
+            print ("A with "+str(name)+" was added")
+        else:
+            raise Exception
 
-
-
-    
 
 class place:
     def __init__(self,name,district,latitude,longitude,rate,tag):
@@ -78,11 +76,14 @@ class place:
         self.history=rate
         self.rate=round(sum(rate)/len(rate),2)
         self.tag=tag
-        place.add(self.name,self.district,self.longitude,self.longitude,self.history,self.rate,self.tag)
+        place.Add(self.name,self.district,self.longitude,self.longitude,self.history,self.rate,self.tag)
 
-    def add(name,district,latitude,longitude,history,rate,tag):
+    def Add(name,district,latitude,longitude,history,rate,tag):
         if (latitude!=0 and longitude!=0 and name!="0"):
             places.append([name,district,latitude,longitude,history,rate,tag])
+            return True
+        else:
+            raise Exception
 
     def getwikipediainfo(query):
         sum1=wikipedia.summary(query,sentences=1)
@@ -104,8 +105,6 @@ def speak(x):
     s.say(x)
     s.runAndWait()
 
-
-
 #place.getwikipediainfo("Lumbini")
 
 #name,address,age,email,passkey,desp_ur,liscence_no,contact,sex,lang,busy
@@ -120,9 +119,7 @@ user("Samira","Kaski","34","samirpok@gmail.com","samirkills","i love everyone","
 #self,name,address,age,email,passkey,position,skill,desp_ur,liscence_no,contact,sex,lang,busy,rating)
 
 guide("Pratap","patan",19,"pratappokheral@gmail.com",'pratap_rocks','driver','10 +2','pratap is a lonely boy','890890890890','9841123456','m',['hindi','bhojpuri','french'],False,'4')
-
 guide("Hiptap","pokhara",19,"hittappokheral@gmail.com",'hittaprocks','retired officer','masters','mero desh mero nepal','123123123123','9841823456','m',['hindi','english','french'],False,'4.3')
-
 guide("hittap","pokhara",19,"hittappaudel@gmail.com",'hittaprockz','coffee maker','masters','mero desh mero country','123123123123','9848823456','m',['hindi','jeum','french'],False,'4.3')
 
 #self,name,district,latitude,longitude,rate,tag
@@ -133,23 +130,112 @@ place("Boudhanath","Kathmandu",27.7214, 85.3620,[5,4,2,1],['religious','spiritua
 links=['butwal','nagarkot','lumbini','boudhanath']
 
 
-@app.route('/signup/', methods=['post', 'get'])
-def login():
-    message = 'PLEASE ENTER VALID INFORMATION'
+'''
+
+
+  def getwikipediainfo(query):
+        sum1=wikipedia.summary(query,sentences=1)
+        sum2=wikipedia.summary(query)
+        #tospeak is sum1,to print is sum 2
+        query=wikipedia.page(query).title
+        return([sum1,sum2,query])
+    
+
+'''
+@app.route('/<place>')
+def displayplace(place):
+    
+    info=place.getwikipediainfo(place)
+    threading.Thread(name="wikipedia",target=speak,args=info[0]).start()
+    body_content=info[1]
+    title=info[2]
+    return render_template('layout_ans.html',
+        body_content=body_content,
+        title=title)
+
+
+#displayplace('Barhabise')
+
+@app.route('/signup_guide/', methods=['post', 'get'])
+def login_guide():
+    message = 'GUIDES MUST PROVIDE VALID INFORMATION'
     if request.method == 'POST':
-        name = request.form.get('name')
+        name = request.form.get('username')
         address = request.form.get('address')
         age = request.form.get('age')  
-        email_address = request.form.get('email_address')
+        email = request.form.get('email_address')
         passkey=request.form.get('passkey')  
         desp_ur=request.form.get('desp_ur')
-        license_no=request.form.get('liscense_no')
+        skill=request.form.get('skill')
+        position=request.form.get('position')
+        licence_no=request.form.get('licence_no')
         contact=request.form.get('contact')
         sex=request.form.get('sex')
         lang=request.form.get('lang')
         lang=str(lang).split(",")
+        print(name,address,email,position,skill,passkey,age,desp_ur,licence_no,contact,sex,lang,False,2.5)
+            
+        try:
+            guide.Add(name,address,email,position,skill,passkey,age,desp_ur,licence_no,contact,sex,lang,False,2.5)
+        
+        except:
+            print("\n \n ")
+            print("ERROr OCCURED")
+            message=message+"ERRROR IN THE ENTERED DATA"  
 
-    return render_template('layout_user_signup.html', message=message)
+
+    return render_template('guide_signup.html', message=message)
+
+
+#add(name,district,latitude,longitude,history,rate,tag)
+@app.route("/addplace/",methods=['post','get'])
+def addplace():
+    message="Enter a place"
+    if request.method == 'POST':
+        name = request.form.get('username')
+        district = request.form.get('address')
+        latitude =request.form.get('latitude') 
+        longitude = request.form.get('longitude')
+        rates=[2.5,2.5,2.5]  
+        rate=round(sum(rates)/len(rates),2)
+        tags=request.form.get('tags')
+        tags=tags.split(',')
+        print((name,district,latitude,longitude,rate,tags))
+        try:
+            print((name,district,latitude,longitude,rates,rate,tags))
+            place.Add(name,district,latitude,longitude,rates,rate,tags)
+            
+        except Exception as e :
+            print (e)
+            print("\n")
+            print("ERROr OCCURED")
+            message=message+"ERRROR IN THE ENTERED DATA"  
+    return render_template('enterplace.html', message=message)
+
+@app.route('/signup_user/', methods=['post', 'get'])
+def signup_user():
+    message = 'USERS MUST PROVIDE VALID INFORMATION'
+    if request.method == 'POST':
+        name = request.form.get('username')
+        address = request.form.get('address')
+        age = request.form.get('age')  
+        email = request.form.get('email_address')
+        passkey=request.form.get('passkey')  
+        desp_ur=request.form.get('desp_ur')
+        contact=request.form.get('contact')
+        sex=request.form.get('sex')
+        lang=request.form.get('lang')
+        lang=str(lang).split(",")
+        try:
+            print((name,address,email,passkey,age,desp_ur,contact,sex,lang))
+            user.Add(name,address,email,passkey,age,desp_ur,contact,sex,lang)
+            
+        except:
+            print("ERROr OCCURED")
+            message=message+"ERRROR IN THE ENTERED DATA"  
+    return render_template('user_signup.html', message=message)
+
+
 
 
 @app.route("/butwal")
@@ -161,7 +247,6 @@ def butwal():
     head=wiki[2]
     threading.Thread(name="get",target=speak,args=(x,)).start()
     return render_template("desp.html",body=body,head=head)
-
 
 
 @app.route("/nagarkot")
@@ -185,6 +270,7 @@ def lumbini():
     body=sum_2_print
     return render_template("desp.html",body=body,head=head) 
 
+
 @app.route("/boudhanath")
 def boudhanath():
     wiki=place.getwikipediainfo("boudhanath")
@@ -198,11 +284,13 @@ def boudhanath():
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html',places=places,links=links)
+    return render_template('home.html')
 
 @app.route("/about")
 def abt():
     return render_template('about.html',title="HELL YEAH")
+
+
 
 if __name__=="__main__":
     app.run(debug=True)

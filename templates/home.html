@@ -1,35 +1,265 @@
-{% extends "layout.html" %}
-{% block content %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+*{
+    margin: 0px;
+    border: 0px;
+    padding:0px;
+}
 
-{% set i=0 %}
+body{
+    background-color: rgba(189, 175, 117, 0.479);
+    background-image: url("{{ url_for('static', filename='bg11.jpg') }}");
+    font-family:serif;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    font-size:18px;
+}
 
-<div class=>
+h5{
+    padding:20px;
+    margin:0px;
+    border:3px solid #123455;
+    text-align: center;
+    font-size:50px;
+    color:white;
+    font-family:"Youth Power";
+}
+
+h4{
+    font-family: "Verdana";
+    position: relative;
+    font-size:28px;
+    color:rgb(221, 119, 36);
+    text-align:justify;
+    padding:9px;
+}
+
+marquee{
+    font-family:"Elianto";
+    font-size:28px;
+}
+
+.vny2020:hover, .welcome-msg{
+    display:block;
+    font-family: "Verdana";
+    position: relative;
+    font-size:28px;
+    color:rgb(221, 119, 36);
+    text-align:justify;
+}
+
+h2{
+    color:#fff;
+    font-size: 35px;
+    padding:20px;
+}
+
+.intro .logo{
+    font-family:"sans-serif";
+    text-decoration: solid;
+    font-size: 20px;
+    background-image: linear-gradient(rgb(255, 160, 36),rgb(231, 172, 94));
+    padding:30px;
+}
+
+.intro .logo{
+    background-color:rgba(255, 160, 36,0.5);
+}
+
+.intro .logo img{
+    transform:translate(10px,10px);
+    margin-left:50px;
+    margin-right:50px;
+    width: 300px;
+    height:100px;
+    border-radius: 60px;
+}
+
+.intro .logo .HMNR{
+    float:right;
+    font-family:"youth power";
+    text-decoration: bold;
+    color:white;
+    font-size: 50px;
+    margin-top:0px;
+    width:50%;
+}
+
+.navigation{
+    display:block;
+    width:100%;
+    margin:auto;
+}
+
+ul{
+    float:right;
+    font-family:serif;
+    font-size: 20px;
+    width:100%;
+    color:#fff;
+    text-decoration: none;
+    padding-left: 40px;
+    text-align:center;
+    background-color: rgb(255, 160, 36);
+}
+
+ul li{
+    margin:auto;
+    display:inline-block;
+    padding:15px 0px;   
+}
+
+ul li a,ul li a:visited{
+    float:center;
+    margin:auto;
+    color:#fff;
+    text-decoration: none;
+    padding:15px 20px;
+}
+
+
+ul li a:hover,ul li a:active{
+    margin:auto;
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+    padding:15px 20px;
+    border:0px;
+    background-color: #dddddd;
+    transition: 0.9s ease;
+}
+
+.intro{
+    height: 20mm;
+    position: relative;
+    height:100px;
+}
+
+
+.info{
+    width:650px;
+    padding:15px;
+    margin:15px;
+    background-color: rgba(255, 235, 205, 0.307);
+}
+
+
+.welcome-msg{    
+    font-family: 'Times New Roman', Times, serif;
+    position: relative;
+    font-size:18px;
+    color:rgb(255, 249, 249);
+    width:600px;
+    padding:20px;
+    text-align:justify;
+}
+
+.gallery{
+    background-color:#d36735 ;
+    width:100%;
+    margin-top: 300px;
+}
+
+
+.gallery .photos{
+    background-color:rgba(9,9,9,0.3) ;
+    background-image: url("{{ url_for('static', filename='bg2.jpg') }}"); 
     
-    {% for place in places %}
-        <p>
-        
-            <h1> {{place[0] }} </h1>
-            <h5>District : {{place[1] }} </h5>
-            <h5>Rating : {{ place [5]}}</h5>
-            <h5>Recent Ratings :
-            {% for rate in place[4] %}
-                {{ rate }},
-            {%endfor%}
-            </h5>
+    background-size:110%; 
+    background-repeat:no-repeat;  
+}
+
+.gallery .photos img:hover{
+    margin-top:50px;
+    width:315px;
+    border:5px ridge black;
+    height:420px;
+    margin:10px;
+    padding:2px;
+    display:inline-block;
+    opacity:100%;
+    
+    transform: scale(105%);
+    transition:0.6s ease;
+}
+
+.foot{
+    margin:40px;
+    color:rgb(245, 33, 33);
+    text-align:center;
+}
+
+text{
+    margin:40px;
+    color:rgb(245, 33, 33);
+    text-align:center;
+    
+}
+
+.gallery .photos img{
+    margin-top:50px;
+    width:300px;
+    border:5px ridge black;
+    height:400px;
+    margin:10px;
+    padding:2px;
+    transform: scale(100%);
+    display:inline-block;
+    opacity: 40%;
+}
 
 
-        <h5>Tags :
-            {% for rate in place[6] %}
-                {{ rate }},
-            {% endfor %}
-            </h5>
-        </p>
-        
-        {%set i=loop.index-1 %}
+</style>
+    <title>Visit Nepal</title>
 
-        <a href="{{ links[i] }}" ><input type="button" value="Load More"></a>
-        
-    {%endfor %}
+  </head>
 
- </div>
-{% endblock %}
+  <body>
+    <div class="intro">
+      <div class="navigation">
+    <div class="logo"><img src="./img/2020logo.jpg"><p class="HMNR">HEAVEN IS MYTH <br>NEPAL IS REAL</p></div>
+      <ul>
+        <li class="active"><a href=#>Home</a></li>
+        <li><a href=#>Why Nepal</a></li>
+        <li><a href=#>Flights</a></li>
+        <li><a href=#>Offers</a></li>
+        <li><a href=#>Guides</a></li>
+        <li><a href=#>About Us</a></li>
+      </ul>
+      </div>
+    </div>
+    <marquee><h2>A Glimpse of Eternal Snows celebrates Nepali wildlife: a smooth grey boulder lifts its head to become a rhinoceros; a langur look-out hysterically grunts the alarm from the treetop as a tiger merges into the dappled scrub; and a menacing mantis makes her home in the makeshift bathroom and refuses to become a pet. - Jane Wilson Howarth</h2></marquee>
+    <div class="info"><div 
+      class="welcome_msg"><h4>VISIT NEPAL</h4>    
+      <p class="welcome-msg">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Welcome visitors to celebrate the year 2020 which is chosen as national tourism year of Nepal after the year 2011 which was the primary authority tourism year of new Federal Democratic Republic of Nepal. The government and tourism department of Nepal authoritatively reported that Nepal will take year 2020 as "Visit Nepal 2020", a year committed to tourism industry of Nepal with vision of making a reasonable brand picture of Nepal as travel and vacationer destination, backing up the tourism foundations of Nepal, enhance the growth of tourism industry, and enhance locale tourism as supportable industry. The legislature has wanted to accommodate more than one million visitors amid the year of “Visit Nepal 2020”. The government has formally initiated the open connection program for Visit Nepal Year 2020 for the arrangements and approach starting from the year 2016/2017 to reinforce and give a decent foundation for the year 2020.
+      </p>
+
+    </div>
+    </div>
+    <div class="gallery">
+      <h5>Photo Gallery</h5>
+      <ul class="photos">         
+        <li><img src="{{ url_for('static', filename='swayambhu.jpg') }}"></li>  
+        <li><img src="{{ url_for('static', filename='swayambhu_water.jpeg') }}"></li>
+        <li><img src="{{ url_for('static', filename='wpp.jpg') }}"></li> 
+        <li><img src="{{ url_for('static', filename='view.jpg') }}"></li>  
+        <li><img src="{{ url_for('static', filename='view.jpg') }}"></li>  
+        <li><img src="{{ url_for('static', filename='pot1.jpeg') }}"></li>
+        <li><img src="{{ url_for('static', filename='bds.jpg') }}"></li>
+        <li><img src="{{ url_for('static', filename='dolls.jpg') }}"></li>
+      </ul>
+    </div>
+
+  <div class="foot">
+    <text>
+    This is a prototype of how our idea is going to be implemented in a webpage.<br>
+    This webpage is made by<br> <h1>TEAM BSNA</h1><br>
+    Bikram Samir Nirjal Arjab </text>
+  </div>
+  </div>
+  </body>
+</html>
