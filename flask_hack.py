@@ -65,7 +65,7 @@ class user:
             #formally adding to the list
             users.append([name,address,email,passkey,age,desp_ur,contact,sex,lang])
             print ("A block was added with \n")
-            print (users[length(users)-1]) 
+            #print (users[(len(users)-1)]) 
         else:
             raise Exception
 
@@ -241,6 +241,7 @@ def signup_user():
             print((name,address,email,passkey,age,desp_ur,contact,sex,lang))
             user.Add(name,address,email,passkey,age,desp_ur,contact,sex,lang)
             
+            
         except:
             print("ERROr OCCURED")
             message=message+"ERRROR IN THE ENTERED DATA"  
@@ -271,39 +272,9 @@ def nagarkot():
 global useris
 useris=[]
 
+
+
 #guide("Pratap","patan",19,"pratappokheral@gmail.com",'pratap_rocks','driver','10 +2','pratap is a lonely boy','890890890890','9841123456','m',['hindi','bhojpuri','french'],False,'4')
-@app.route('/login_user/', methods=['post', 'get'])
-def login():
-    if request.method == 'POST':
-        emu= request.form.get('emu')
-        passw=request.form.get('passkey')
-        #matching emu
-        i=0
-        for user in users:
-            username=user[0]
-            email=user[3]
-            password=user[5]
-
-            if ((emu==username or email==emu) and password==passw):
-                useris=user
-                print(useris)
-                return redirect(url_for('msgpool'),useris=useris)
-        
-        for user in guides:
-            username=user[0]
-            email=user[3]
-            password=user[5]
-
-            if ((emu==username or email==emu) and password==passw):
-                useris=user
-                return redirect(url_for('msgpool'),useris=useris)
-        
-
-
-        
-    return render_template('login.html')
-
-
 
 
 @app.route('/msgpool',methods=['post','get'])

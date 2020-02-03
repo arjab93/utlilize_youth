@@ -9,11 +9,15 @@
     border: 0px;
     padding:0px;
 }
-
+*{
+    margin: 0px;
+    border: 0px;
+    padding:0px;
+}
 
 body{
-    background-color: rgba(0, 0, 0, 0.479);
-    background-image: url("{{ url_for('static', filename='bg11.jpg') }}");
+    background-image: url("{{ url_for('static', filename='bgreal.jpg') }}");
+    background-color: rgba(189, 175, 117, 0.479);
     font-family:serif;
     background-size: 100%;
     background-repeat: no-repeat;
@@ -90,18 +94,6 @@ h2{
     width:50%;
 }
 
-    
-h1{
-    font-size: 20px;
-    max-width: 501px;
-    padding: 15px;
-    color: white;
-    border: 2px solid black;
-    border-bottom: 0px;
-    margin: auto;
-    background-color: cyan;
-}
-
 .navigation{
     display:block;
     width:100%;
@@ -173,14 +165,13 @@ ul li a:hover,ul li a:active{
 .gallery{
     background-color:#d36735 ;
     width:100%;
-    margin-top: 300px;
+    margin-top: 400px;
 }
 
 
 .gallery .photos{
-    background-color:rgba(9,9,9,0.3) ;
-    background-image: url("{{ url_for('static', filename='bg2.jpg') }}"); 
-    
+    background-color:rgba(9,9,9,0.3) ; 
+    background-image:url("{{ url_for('static', filename='bg2.jpg') }}");
     background-size:110%; 
     background-repeat:no-repeat;  
 }
@@ -232,25 +223,25 @@ text{
   <body >
     <div class="intro">
       <div class="navigation">
-    <div class="logo"><img src="./img/2020logo.jpg"><p class="HMNR">HEAVEN IS MYTH <br>NEPAL IS REAL</p></div>
+    <div class="logo"><img src="{{ url_for('static', filename='2020logo.jpg') }}"><p class="HMNR">HEAVEN IS MYTH <br>NEPAL IS REAL</p></div>
       <ul>
             <li><a href="http://localhost:5000/">Home</a></li>
-            <li><a href="sign_users">Sign User</a></li>
+            
             <li><a href="addplace">Add Place</a></li>
-            <li><a href="signup_guide">Sign Guides</a></li>
-            <li><a href="login_user">Log In</a></li>
-        </ul>
+            <li><a href="signup_guide">Apply for Guide</a></li>
+            </ul>
       </div>
     </div>
     <marquee><h2>A Glimpse of Eternal Snows celebrates Nepali wildlife: a smooth grey boulder lifts its head to become a rhinoceros; a langur look-out hysterically grunts the alarm from the treetop as a tiger merges into the dappled scrub; and a menacing mantis makes her home in the makeshift bathroom and refuses to become a pet. - Jane Wilson Howarth</h2></marquee>
     <div class="info"><div 
-      class="welcome_msg"><h4>VISIT NEPAL</h4>    
-      <p class="welcome-msg">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Welcome visitors to celebrate the year 2020 which is chosen as national tourism year of Nepal after the year 2011 which was the primary authority tourism year of new Federal Democratic Republic of Nepal. The government and tourism department of Nepal authoritatively reported that Nepal will take year 2020 as "Visit Nepal 2020", a year committed to tourism industry of Nepal with vision of making a reasonable brand picture of Nepal as travel and vacationer destination, backing up the tourism foundations of Nepal, enhance the growth of tourism industry, and enhance locale tourism as supportable industry. The legislature has wanted to accommodate more than one million visitors amid the year of “Visit Nepal 2020”. The government has formally initiated the open connection program for Visit Nepal Year 2020 for the arrangements and approach starting from the year 2016/2017 to reinforce and give a decent foundation for the year 2020.
-      </p>
-
-    </div>
-    </div>
+        class="welcome_msg"><h4>VISIT NEPAL</h4>    
+        <p class="welcome-msg">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Welcome visitors to celebrate the year 2020 which is chosen as national tourism year of Nepal after the year 2011 which was the primary authority tourism year of new Federal Democratic Republic of Nepal. The government and tourism department of Nepal authoritatively reported that Nepal will take year 2020 as "Visit Nepal 2020", a year committed to tourism industry of Nepal with vision of making a reasonable brand picture of Nepal as travel and vacationer destination, backing up the tourism foundations of Nepal, enhance the growth of tourism industry, and enhance locale tourism as supportable industry. The legislature has wanted to accommodate more than one million visitors amid the year of “Visit Nepal 2020”. The government has formally initiated the open connection program for Visit Nepal Year 2020 for the arrangements and approach starting from the year 2016/2017 to reinforce and give a decent foundation for the year 2020.
+        </p>
+  
+      </div>
+      </div>
+    
     <div class="gallery">
       <h5>Photo Gallery</h5>
       <ul class="photos">         
@@ -266,10 +257,10 @@ text{
     </div>
 
   <div class="foot">
-    <text>
+    <text><h1>
     This is a prototype of how our idea is going to be implemented in a webpage.<br>
-    This webpage is made by<br> <h1>TEAM BSNA</h1><br>
-    Bikram Samir Nirjal Arjab </text>
+    This webpage is made by<br>TEAM BSNA<br>
+    Bikram Samir Nirjal Arjab </text></h1>
   </div>
   </div>
   </body>
